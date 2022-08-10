@@ -1,0 +1,30 @@
+#include <map>
+class Solution {
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        this->nums = nums;
+        std::map<int, bool> used;
+        std::vector<int> combo;
+        combine(used, combo);
+        return combinations;
+    }
+    
+    void combine(std::map<int, bool> used, std::vector<int> combo) {
+        if (combo.size() == nums.size()) {
+            combinations.push_back(combo);
+            return;
+        }
+        for (int i = 0; i < nums.size(); i++) {
+            if (used[i] == false) {
+                std::map<int, bool> temp = used;
+                temp[i] = true;
+                std::vector<int> new_combo = combo;
+                new_combo.push_back(nums.at(i));
+                combine(temp, new_combo);
+            }
+        }
+    }
+private:
+    std::vector<std::vector<int>> combinations;
+    std::vector<int> nums;
+};
